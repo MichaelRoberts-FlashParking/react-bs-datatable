@@ -83,6 +83,18 @@ export declare type DatatableProps = {
     tableBody: any[];
     /** Initial sort of the table. */
     initialSort?: SortType;
+    /** Initial filter text of the table. */
+    initialFilterText?: string;
+    /** Initial page number of the table. */
+    initialPageNumber?: number;
+    /** onFilter callback. */
+    onFilterCallback?: (text: string, currentPage: number) => {};
+    /** onPaginate callback. */
+    onPaginateCallback?: (nextPage: number) => {};
+    /** onSort callback. */
+    onSortCallback?: (nextSort: SortType) => {};
+    /** onRowsPerPageChange callback. */
+    onRowsPerPageChangeCallback?: (numOfPage: number, currentPage: number) => {};
     /** Custom onSort data modifier. */
     onSort?: any;
     /** Custom onFilter data modifier. */

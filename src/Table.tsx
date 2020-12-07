@@ -27,6 +27,12 @@ import { useComponentProvider } from './modules/TableContext';
 
 export function useDatatableLifecycle({
   initialSort,
+  initialFilterText,
+  initialPageNumber,
+  onFilterCallback,
+  onPaginateCallback,
+  onSortCallback,
+  onRowsPerPageChangeCallback,
   onSort,
   onFilter,
   rowsPerPage,
@@ -112,8 +118,8 @@ export function useDatatableLifecycle({
       sortedProp: defaultSort,
       filterable,
       rowsPerPage,
-      currentPage: 1,
-      filterText: ''
+      currentPage: initialPageNumber ?? 1,
+      filterText: initialFilterText ?? ''
     };
   });
 
@@ -138,6 +144,7 @@ export function useDatatableLifecycle({
         filterText: text,
         currentPage: 1
       }));
+      onFilterCallback && onFilterCallback(text, 1);
     }
   }
 
@@ -149,6 +156,7 @@ export function useDatatableLifecycle({
         ...oldState,
         currentPage: nextPage
       }));
+      onPaginateCallback && onPaginateCallback(nextPage);
     }
   }
 
@@ -161,6 +169,7 @@ export function useDatatableLifecycle({
         rowsPerPage: numOfPage,
         currentPage: 1
       }));
+      onRowsPerPageChangeCallback && onRowsPerPageChangeCallback(numOfPage, 1);
     }
   }
 
@@ -181,6 +190,7 @@ export function useDatatableLifecycle({
         ...oldState,
         sortedProp: nextSort
       }));
+      onSortCallback && onSortCallback(nextSort);
     }
   }
 
